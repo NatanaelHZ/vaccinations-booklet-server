@@ -1,5 +1,9 @@
+const bcrypt = require('bcrypt');
+
+const SALT_ROUNDS = 6;
+
 module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("user", {
+  const User = sequelize.define('user', {
     name: {
       type: Sequelize.STRING
     },
@@ -8,6 +12,13 @@ module.exports = (sequelize, Sequelize) => {
     },
     password: {
       type: Sequelize.STRING
+    }
+  },{
+    hooks: {
+      beforeCreate: (user,  options) => {
+        const hash = bcrypt.hashSync(user.password, SALT_ROUNDS);
+        user.password = hash;
+      }
     }
   });
 
