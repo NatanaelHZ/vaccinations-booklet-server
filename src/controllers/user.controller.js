@@ -1,14 +1,11 @@
-const db = require("../models");
-const User = db.user;
+const { User } = require("../models");
 
 exports.create = (request, response) => {
 
   if (!request.body) {
-    response.status(400).send({
+    return response.status(400).json({
       message: 'Failed to create new user.'
     });
-
-    return;
   }
 
   const user = {
@@ -18,11 +15,11 @@ exports.create = (request, response) => {
   };
 
   User.create(user).then(data => {
-    response.send({
+    return response.json({
       message: 'Success to create new user.'
     });
   }).catch(error => {
-    response.status(500).send({
+    return response.status(500).json({
       message: error.message || 'Erro to create new user'
     });
   });
