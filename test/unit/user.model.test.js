@@ -1,4 +1,4 @@
-const User = require('../../src/models/user.model.js');
+const User = require('../../src/models/User.js');
 const {
     sequelize,
     dataTypes,
