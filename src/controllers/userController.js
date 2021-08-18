@@ -8,9 +8,9 @@ exports.create = async (req, res) => {
       id: user.id,
       message: 'success_create_user'
     });
-  } catch {
-    return res.status(500).json({
-      message: 'fail_create_user'
+  } catch (e) {
+    return res.status(400).json({
+      message: e.message
     });
   }
 };
