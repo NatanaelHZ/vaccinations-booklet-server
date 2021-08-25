@@ -13,13 +13,17 @@ module.exports = (sequelize, Sequelize) => {
 
   User.init({
     name: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
     },
     email: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: true
     },
     password: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false
     }
   },{
     sequelize,
@@ -29,7 +33,13 @@ module.exports = (sequelize, Sequelize) => {
         const hash = bcrypt.hashSync(user.password, SALT_ROUNDS);
         user.password = hash;
       }
-    }
+    },
+    indexes: [
+      {
+        unique: true,
+        fields: ['email']
+      }
+    ]
   });
 
   return User;

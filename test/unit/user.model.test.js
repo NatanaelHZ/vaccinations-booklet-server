@@ -5,7 +5,7 @@ const { sequelize, Sequelize } = require('sequelize-test-helpers')
 describe('User', () => {
   const { DataTypes } = Sequelize
 
-  const UserFactory = proxyquire('../../src/models/user.model.js', {
+  const UserFactory = proxyquire('../../src/models/User.js', {
     sequelize: Sequelize
   })
 
