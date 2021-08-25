@@ -13,6 +13,3 @@ db.sequelize.sync();
 app.listen(process.env.PORT, () => {
   console.log(`Example app listening at http://localhost:${process.env.PORT}`);
 });
-
-//Código exemplo model
-//https://bezkoder.com/node-express-sequelize-postgresql/#Initialize_Sequelize
