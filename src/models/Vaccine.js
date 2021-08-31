@@ -1,16 +1,12 @@
 'use strict';
 const { Model } = require('sequelize');
 
-module.exports = (sequelize, Sequelize, User) => {
+module.exports = (sequelize, Sequelize) => {
   class Vaccine extends Model {}
 
   Vaccine.init({
     name: {
       type: Sequelize.STRING,
-      allowNull: false
-    },
-    interval: {
-      type: Sequelize.INTEGER,
       allowNull: false
     },
     user_id: {

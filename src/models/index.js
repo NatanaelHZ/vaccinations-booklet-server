@@ -9,6 +9,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.User = require("./User.js")(sequelize, Sequelize);
-db.Vaccine = require("./Vaccine.js")(sequelize, Sequelize, db.user);
+db.Vaccine = require("./Vaccine.js")(sequelize, Sequelize);
 
 module.exports = db;
