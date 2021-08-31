@@ -1,28 +1,35 @@
-const User = require('../../src/models/user.model.js');
-const {
-    sequelize,
-    dataTypes,
-    checkModelName,
-    checkPropertyExists,
-    checkHookDefined
-  } = require('sequelize-test-helpers');
+const { expect } = require('chai')
+const proxyquire = require('proxyquire')
+const { sequelize, Sequelize } = require('sequelize-test-helpers')
 
 describe('User', () => {
-    const Model = User(sequelize, dataTypes);
-    const instance = new Model();
+  const { DataTypes } = Sequelize
 
-    it('Should have name user', () => {
-        checkModelName(Model)('user');
-    });
+  const UserFactory = proxyquire('../../src/models/User.js', {
+    sequelize: Sequelize
+  })
 
-    it('Should have properties', () => {
-        ['email', 'password', 'name'].forEach(checkPropertyExists(instance));
-    })
+  let User
 
-    describe('#hooks', () => {
-        it('Should have before create hook', () => {
-            ['beforeCreate'].forEach(checkHookDefined(instance));
-        });
-    });
-});
+  before(() => {
+    User = UserFactory(sequelize, DataTypes)
+  })
 
+  after(() => {
+    User.init.resetHistory()
+  })
+
+  it('called User.init with the correct parameters', () => {
+    User.init.calledWith(
+      {
+        name: DataTypes.STRING,
+        email: DataTypes.STRING,
+        password: DataTypes.STRING
+      },
+      {
+        sequelize,
+        tableName: 'users'
+      }
+    )
+  })
+})

@@ -8,7 +8,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.User = require("./user.model.js")(sequelize, Sequelize);
+db.User = require("./User.js")(sequelize, Sequelize);
 db.Vaccine = require("./Vaccine.js")(sequelize, Sequelize, db.user);
 
 module.exports = db;
