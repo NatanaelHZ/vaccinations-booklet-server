@@ -6,7 +6,10 @@ exports.create = async (req, res) => {
 
     const vaccineCreated = await Vaccine.create(vaccine);
 
-    return res.status(201).json({ vaccine: vaccineCreated, message: 'success_create_vaccine' });
+    return res.status(201).json({ 
+      vaccine: vaccineCreated, 
+      message: 'success_create_vaccine' 
+    });
   } catch (e) {
     return res.status(400).json({
       message: e.message
