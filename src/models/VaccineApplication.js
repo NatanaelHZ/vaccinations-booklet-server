@@ -16,12 +16,6 @@ module.exports = (sequelize, Sequelize) => {
     is_applied: {
       type: Sequelize.BOOLEAN,
     },
-    created_at: {
-      type: Sequelize.DATE,
-    },
-    updated_at: {
-      type: Sequelize.DATE,
-    },
   },{
     sequelize,
     tableName: 'vaccine_applications',
