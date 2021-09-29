@@ -1,5 +1,5 @@
 const VaccineController = require('../controllers/vaccineController');
 
-module.exports = (routes) => {
-  routes.post("/vaccines", VaccineController.create);
+module.exports = (routes, auth) => {
+  routes.post("/vaccines", auth, VaccineController.create);
 };
