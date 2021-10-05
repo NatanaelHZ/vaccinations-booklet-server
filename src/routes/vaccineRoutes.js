@@ -1,6 +1,6 @@
 const VaccineController = require('../controllers/vaccineController');
 
-module.exports = (routes) => {
-  routes.get("/vaccines", VaccineController.list);
+module.exports = (routes, auth) => {
+  routes.get("/vaccines", auth, VaccineController.list);
+  routes.post("/vaccines", auth, VaccineController.create);
 };
-
