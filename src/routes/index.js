@@ -6,6 +6,6 @@ const vaccineRoutes = require('./vaccineRoutes');
 const routes = Router();
 
 userRoutes(routes);
-vaccineRoutes(routes, auth);
+vaccineRoutes(routes,auth);
 
 module.exports = routes;
