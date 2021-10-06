@@ -1,4 +1,3 @@
-const { expect } = require('chai')
 const proxyquire = require('proxyquire')
 const { sequelize, Sequelize } = require('sequelize-test-helpers')
 
@@ -24,7 +23,8 @@ describe('User', () => {
       {
         name: DataTypes.STRING,
         email: DataTypes.STRING,
-        password: DataTypes.STRING
+        password: DataTypes.STRING,
+        asked_recovery_password: DataTypes.BOOLEAN,
       },
       {
         sequelize,
