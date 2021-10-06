@@ -1,4 +1,5 @@
 const { Vaccine } = require('../models');
+//const { VaccineApplication } = require('../models');
 
 exports.list = async (req, res) => {
   try {
@@ -30,12 +31,22 @@ exports.list = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const vaccine = { ...req.body, user_id: req.currentUser.id };
+    const vaccine = { name: req.body.name, user_id: req.currentUser.id };
+    const vaccineApplication = [...req.body.applications ];
+
+    console.log(`Não Serializado ${JSON.stringify(vaccineApplication)}`);
 
     const vaccineCreated = await Vaccine.create(vaccine);
 
+    const applications = vaccineApplication.map(application => (
+      { ...application,  vaccine_id: vaccineCreated.id }));
+
+    console.log(`Serializado ${JSON.stringify(applications)}`);
+    //const applicationsCreated = await VaccineApplication.bulkCreate(applications);
+
     return res.status(201).json({ 
-      vaccine: vaccineCreated, 
+      vaccine: vaccineCreated,
+      applications: {},
       message: 'success_create_vaccine' 
     });
   } catch (e) {
