@@ -32,17 +32,17 @@ exports.list = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const vaccine = { name: req.body.name, user_id: req.currentUser.id };
-    const vaccineApplication = [...req.body.applications ];
-
-    console.log(`Não Serializado ${JSON.stringify(vaccineApplication)}`);
+    const vaccineApplications = [...req.body.applications ];
 
     const vaccineCreated = await Vaccine.create(vaccine);
 
-    const applications = vaccineApplication.map(application => (
-      { ...application,  vaccine_id: vaccineCreated.id }));
-
-    console.log(`Serializado ${JSON.stringify(applications)}`);
-    //const applicationsCreated = await VaccineApplication.bulkCreate(applications);
+    if (vaccineApplications.length) {
+      const applications = vaccineApplications.map(application => (
+        { ...application,  vaccine_id: vaccineCreated.id }));
+  
+      console.log(`Serializado ${JSON.stringify(applications)}`);
+      //const applicationsCreated = await VaccineApplication.bulkCreate(applications);
+    }
 
     return res.status(201).json({ 
       vaccine: vaccineCreated,
